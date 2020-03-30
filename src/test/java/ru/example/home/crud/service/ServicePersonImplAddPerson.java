@@ -7,14 +7,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import ru.example.home.crud.entity.Person;
 import ru.example.home.crud.repo.RepositoryPerson;
 
-import javax.transaction.Transactional;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThrows;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)

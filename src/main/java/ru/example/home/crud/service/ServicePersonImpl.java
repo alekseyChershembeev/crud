@@ -1,5 +1,6 @@
 package ru.example.home.crud.service;
 
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.example.home.crud.entity.Person;
@@ -13,6 +14,7 @@ import java.util.Optional;
 @Service
 @Transactional(rollbackOn = Exception.class)
 
+@NoArgsConstructor
 public class ServicePersonImpl implements ServicePerson {
 
     private RepositoryPerson repositoryPerson;

@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.example.home.crud.entity.Person;
-import ru.example.home.crud.repo.RepositoryPerson;
 import ru.example.home.crud.service.ServicePerson;
 
 import java.util.List;
@@ -23,7 +22,7 @@ public class MainController {
     }
 
     @GetMapping("/persons")
-    public List<Person> listPage() {
+    public List<Person> getAllPersons() {
         return servicePerson.getAllPersons();
     }
 
