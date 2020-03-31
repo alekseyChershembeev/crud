@@ -4,3 +4,11 @@ spring:
       host:localhost
       port:27017
       database:crudDB
+
+#  datasource:
+#    driverClassName: com.mysql.cj.jdbc.Driver
+#          driverClassName: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://192.168.103.134:3306/users?useUnicode=yes&characterEncoding=UTF-8
+#    userName: root
+#    password: root
+#    initialization-mode: always
