@@ -4,5 +4,10 @@
       "name": "spring.data.driverClassName.password",
       "type": "java.lang.String",
       "description": "Description for spring.data.driverClassName.password."
-  }
-] }
+    },
+    {
+      "name": "datasource.password",
+      "type": "java.lang.String",
+      "description": "Description for datasource.password."
+    }
+  ] }

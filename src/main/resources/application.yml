@@ -5,10 +5,23 @@ spring:
       port:27017
       database:crudDB
 
-#  datasource:
-#    driverClassName: com.mysql.cj.jdbc.Driver
-#          driverClassName: com.mysql.jdbc.Driver
-#    url: jdbc:mysql://192.168.103.134:3306/users?useUnicode=yes&characterEncoding=UTF-8
-#    userName: root
-#    password: root
-#    initialization-mode: always
+  datasource:
+#    driverClassName: com.mysql.jdbc.Driver
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/users?useUnicode=true&serverTimezone=UTC
+    username: root
+    password: root
+    initialization-mode: always
+    tomcat:
+      test-while-idle: true
+      validation-query: SELECT 1
+  jpa:
+    hibernate.ddl-auto: update
+    generate-ddl: true
+    show-sql: true
+
+server:
+  error:
+    whitelabel:
+      enabled: false
+
