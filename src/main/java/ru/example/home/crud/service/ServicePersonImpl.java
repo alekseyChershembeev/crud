@@ -4,7 +4,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.example.home.crud.entity.Person;
-import ru.example.home.crud.exception.PersonNotFoundException;
+import ru.example.home.crud.exception.service.PersonNotFoundException;
 import ru.example.home.crud.repo.RepositoryPerson;
 
 import javax.transaction.Transactional;
@@ -59,22 +59,22 @@ public class ServicePersonImpl implements ServicePerson {
 
         if (person != null) {
             return Optional
-                    .of(repositoryPerson.insert(person))
+                    .of(repositoryPerson.save(person))
                     .orElseThrow(() -> new PersonNotFoundException("update Person", person));
-
         }
         throw new PersonNotFoundException("update Person is null");
 
     }
 
     @Override
-    public void deletePerson(Person person) {
-        if (person != null) {
+    public void deletePerson(String  id) {
+        if (id != null) {
             repositoryPerson
-                    .delete(Optional
-                            .of(person)
-                            .orElseThrow(() -> new PersonNotFoundException("delete Person", person)));
-        }else {
+                    .deleteById(Optional
+                            .of(id)
+                            .orElseThrow(() -> new PersonNotFoundException("delete Person", id)));
+
+        } else {
             throw new PersonNotFoundException("delete Person is null");
         }
 

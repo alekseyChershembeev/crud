@@ -2,6 +2,7 @@ package ru.example.home.crud.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.example.home.crud.entity.Person;
@@ -26,56 +27,38 @@ public class MainController {
         return servicePerson.getAllPersons();
     }
 
-    @GetMapping("/persons/{id}")
-    public ResponseEntity<Optional<Person>> getPerson(@PathVariable(name = "id") String id) {
+    @GetMapping(value = "/persons/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<Person> getPerson(@PathVariable(name = "id") String id) {
 
-        Optional<Person> person = Optional.of(servicePerson.findPersonById(id));
+        Optional<Person> person = Optional.ofNullable(servicePerson.findPersonById(id));
 
-        return person.map(value -> new ResponseEntity<>(person, HttpStatus.OK))
+        return person
+                .map(value -> new ResponseEntity<>(person.get(), HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
     }
 
+    @PostMapping(value = "/persons", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<Person> addPerson(@RequestBody Person person) {
 
-//    @PostMapping("/persons")
-//    public ResponseEntity<Person> addPerson(@RequestBody Person person) {
-
-//        Book book = repositoryPerson.addBook(BookMapper.(bookDto));
-
-//        URI uri = ServletUriComponentsBuilder
-//                .fromCurrentRequest()
-//                .path("/{id}")
-//                .buildAndExpand(repositoryPerson.addBook(book))
-//                .toUri();
-//
-//        return ResponseEntity.created(uri).build();
-
-//        Book book = BookMapper.bookDTOtoBook(bookDTO);
-
-
-//        return (person != null)
-//                ? new ResponseEntity<Person>((servicePerson.addPerson(person).get()), HttpStatus.OK)
-//                : new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-//
-//    }
-//
-//    @PutMapping("/persons/{id}")
-//    public ResponseEntity<Person> showBookForEdit(@PathVariable(name = "id") String id, @RequestBody Person person) {
-
-
-//        Optional<Person> newBook = repositoryPerson.updateBookById(id, book.getTitle(), book.getAuthors(), book.getGenre());
-//
-//        return newBook.map(value -> new ResponseEntity<>(BookMapper.mapBookToDTO(newBook.get()), HttpStatus.OK))
-//                .orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
-
-
-//    }
-//
-//    @DeleteMapping("/persons/{id}")
-//    public ResponseEntity<Void> deleteBook(@PathVariable(name = "id") String id) {
-//        return repositoryPerson.deleteBookById(id)
-//                ? ResponseEntity.noContent().build()
-//                : ResponseEntity.notFound().build();
-//
-//    }
+        return (person != null)
+                ? new ResponseEntity<>((servicePerson.addPerson(person)), HttpStatus.OK)
+                : new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 
     }
+    @PutMapping("/persons/{id}")
+    public ResponseEntity<Person> updatePerson(@PathVariable(name = "id") String id, @RequestBody Person person) {
+        return (person != null&&id!=null)
+                ? new ResponseEntity<>((servicePerson.updatePerson(person)), HttpStatus.OK)
+                : new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+
+    }
+//
+    @DeleteMapping("/persons/{id}")
+    public ResponseEntity<Void> deletePerson(@PathVariable(name = "id") String id) {
+        return (id != null)
+                ? ResponseEntity.noContent().build()
+                : ResponseEntity.notFound().build();
+
+    }
+
+}

@@ -15,7 +15,7 @@ import static org.junit.Assert.assertThrows;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class ServicePersonImplAddPerson {
+public class ServicePersonImplAddPersonTest {
 
     @Autowired
     private ServicePerson servicePerson;
@@ -49,7 +49,6 @@ public class ServicePersonImplAddPerson {
     public void tearDown() throws Exception {
         repositoryPerson.deleteAll();
     }
-
 
     @Test
     public void addPerson() {

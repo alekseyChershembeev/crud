@@ -10,7 +10,7 @@ public interface ServicePerson {
     Person findPersonById(String id);
     Person addPerson(Person id);
     Person updatePerson(Person person);
-    void deletePerson(Person person);
+    void deletePerson(String id);
 
 
 
